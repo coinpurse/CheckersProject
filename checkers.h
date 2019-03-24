@@ -12,6 +12,8 @@ Header File for Checkers game.
 *************************************************************************/
 #include <iostream>
 #include <stdlib.h>
+#include <string.h>
+#include <string>
 
 
 
@@ -20,10 +22,11 @@ using namespace std;
 //PCB is a 5 digit number "aabbc" such that aa = priority number, bb = Process ID, and c = Status
 //typedef unsigned short proc;
 
+const int BOARDSIZE = 8;
 
 enum spaceState
   {
-    empty, // empty = 0
+    blank, // empty = 0
     w_piece, // white piece = 1
     b_piece, // black piece = 2
     w_king, // white king = 3
@@ -39,19 +42,28 @@ class checkers
 {
 
  private:
-  enum spaceState Board[8][8] ;
+  enum spaceState Board[BOARDSIZE][BOARDSIZE];
   int w_pieces;
   int b_pieces;
+  int playerturn;
 
-  void terminal();
-  int generateMove(int, int);
-  void capture(spaceState&, int, int);
-
+  int Move(string initial, string dest);
+  int convertMove(string move, int &y, int &x);
  public:
   checkers();
   ~checkers();
 
-  void initialState();
-  void testing();
+
+  string getMove();
+  int parseMove(string move);
+  void printBoard();
+
+  void setPlayerTurn(int pt);
+  int getPlayerTurn();
+
+  int getBP();
+  int getWP();
+
+  void generateBoard();
 
 };
