@@ -35,7 +35,8 @@ int main() {
 			flag = cboard.parseMove(ai.getMove(cboard.getBoard(), flag));
 		}
 		cboard.printBoard();
-
+		cout << "Black pieces left: " << cboard.getBP() << endl;
+		cout << "White pieces left: " << cboard.getWP() << endl;
 		if (cboard.getWP() == 0) {
 			cout << "Black player wins!" << endl;
 			break;

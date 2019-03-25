@@ -16,8 +16,8 @@ Header File for Checkers game.
 //constructor
 checkers::checkers()
 {
-  w_pieces = 8;
-  b_pieces = 8;
+  w_pieces = 12;
+  b_pieces = 12;
   playerturn = 0;
   for (int x = 0; x < BOARDSIZE; x++) {
 	  for (int y = 0; y < BOARDSIZE; y++) {
