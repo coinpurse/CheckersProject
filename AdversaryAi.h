@@ -17,7 +17,7 @@ struct Node {
 
 class AI {
 private:
-	string AI::int_to_string(moves moveset);
+	string int_to_string(moves moveset);
 	
 	moves IterativeDeepSearch(int* board, int max_depth);
 	Node DFS(Node root, int depth, int alpha, int beta, int optimizer);
@@ -26,5 +26,5 @@ public:
 	~AI();
 	string getMove(spaceState** board, int flag);
 	int* convertBoard(spaceState** board);
-	string AI::double_to_string(moves moveset);
+	string double_to_string(moves moveset);
 };
