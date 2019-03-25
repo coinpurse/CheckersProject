@@ -10,7 +10,7 @@ string AI::getMove(spaceState** board,int flag) {
 	int* newboard = new int[32];
 	newboard = convertBoard(board);
 
-	moves moveset = IterativeDeepSearch(newboard, 3);
+	moves moveset = IterativeDeepSearch(newboard, 4);
 
 	if (flag == 0) {
 		move = int_to_string(moveset);
@@ -76,19 +76,15 @@ moves AI::IterativeDeepSearch(int* board, int max_depth) {
 	mainroot = root;
 	for (int i = 0; i <= max_depth; i++) {
 		mainroot = DFS(root, i, -INFINITE, INFINITE, 0);
-		cout << mainroot.children.size() << endl;
 		if (mainroot.Hval > 10)
 			break;
 	}
-	cout << "iterative search" << endl;
 	for (int i = 0; i < mainroot.children.size(); i++) {
-		cout << mainroot.Hval << " " << mainroot.children.at(i)->Hval << endl;
 		if (mainroot.children.at(i)->Hval == mainroot.Hval) {
 			cout << "Score of " << mainroot.Hval << endl;
 			return mainroot.Ply.pMoves.at(i);
 		}
 	}
-	cout << "fucked up" << endl;
 }
 
 Node AI::DFS(Node root, int depth, int alpha, int beta, int optimizer) {
@@ -101,7 +97,6 @@ Node AI::DFS(Node root, int depth, int alpha, int beta, int optimizer) {
 		return root;
 	}
 	if (root.parent == NULL) {
-		cout << root.Ply.pMoves.size() << endl;
 		value = -INFINITE;
 	}
 	else if (root.parent->maxi) {
@@ -146,16 +141,16 @@ Node AI::DFS(Node root, int depth, int alpha, int beta, int optimizer) {
 						root.Hval = value;
 					}
 					if (value > beta) {		// Cut stuff
-						cout << "pruned max" << endl;
+						cout << "pruned" << endl;
 						y = root.Ply.pMoves.size();
 						break;
 					}
 				}
 				
 			}
-			for (int i = 0; i < root.children.size(); i++) {
+			/*for (int i = 0; i < root.children.size(); i++) {
 				cout << root.Hval << " " << root.children.at(i)->Hval << endl;
-			}
+			}*/
 				return root;
 		}
 		else if (!root.maxi && rootvalue < value) {
@@ -180,15 +175,12 @@ Node AI::DFS(Node root, int depth, int alpha, int beta, int optimizer) {
 						root.Hval = value;
 					}
 					if (value < alpha) {		// Cut stuff
-						cout << "pruned min" << endl;
+						cout << "pruned" << endl;
 						y = root.Ply.pMoves.size();
 						break;
 					}
 				}
 
-			}
-			for (int i = 0; i < root.children.size(); i++) {
-				cout << root.Hval << " " << root.children.at(i)->Hval << endl;
 			}
 			return root;
 		}
