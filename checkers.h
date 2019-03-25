@@ -19,8 +19,6 @@ Header File for Checkers game.
 
 using namespace std;
 
-//PCB is a 5 digit number "aabbc" such that aa = priority number, bb = Process ID, and c = Status
-//typedef unsigned short proc;
 
 const int BOARDSIZE = 8;
 
@@ -63,6 +61,9 @@ class checkers
 
   int getBP();
   int getWP();
+
+  spaceState** getBoard();
+  int* convertBoard(spaceState** board);
 
   void generateBoard();
 

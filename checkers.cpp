@@ -30,6 +30,19 @@ checkers::checkers()
 // Destructor
 checkers::~checkers() {}
 
+spaceState** checkers::getBoard() {
+	spaceState** array = 0;
+	array = new spaceState*[BOARDSIZE];
+
+	for (int i = 0; i < BOARDSIZE; i++) {
+		array[i] = new spaceState[BOARDSIZE];
+
+		for (int x = 0; x < BOARDSIZE; x++) {
+			array[i][x] = Board[i][x];
+		}
+	}
+	return array;
+}
 
 void checkers::generateBoard()
 {
@@ -440,4 +453,44 @@ string checkers::getMove() {
 	string move;
 	getline(cin, move);
 	return move;
+}
+
+int* checkers::convertBoard(spaceState** board) {
+	int* newboard = new int[32];
+	int temp;
+
+	int w = 0;
+	for (int y = 7; y >= 0; y--) {
+		for (int x = 0; x < 8; x++) {
+			if (x % 2 == 1 && y % 2 == 1) {
+				temp = (int)board[x][y];
+				if (temp == 2) {
+					temp = temp - 3;
+				}
+				else if (temp == 3) {
+					temp = temp - 1;
+				}
+				else if (temp == 4) {
+					temp = temp - 6;
+				}
+				newboard[w] = temp;
+				w++;
+			}
+			else if (x % 2 == 0 && y % 2 == 0) {
+				temp = (int)board[x][y];
+				if (temp == 2) {
+					temp = temp - 3;
+				}
+				else if (temp == 3) {
+					temp = temp - 1;
+				}
+				else if (temp == 4) {
+					temp = temp - 6;
+				}
+				newboard[w] = temp;
+				w++;
+			}
+		}
+	}
+	return newboard;
 }
